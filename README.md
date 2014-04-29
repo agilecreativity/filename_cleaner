@@ -1,33 +1,23 @@
-## FilenameClenaer
+## Filename Cleaner
 
 [![Gem Version](https://badge.fury.io/rb/filename_cleaner.svg)](http://badge.fury.io/rb/filename_cleaner)
+[![Dependency Status](https://gemnasium.com/agilecreativity/filename_cleaner.png)](https://gemnasium.com/agilecreativity/filename_cleaner)
+[![Code Climate](https://codeclimate.com/github/agilecreativity/filename_cleaner.png)](https://codeclimate.com/github/agilecreativity/filename_cleaner)
 
-Remove special characters from a filename using the simple rule. Currently any string that are not one of
-letters (a..z, A..Z), numbers (0..9), _ (underscore), - (dash), and ' ' spaces string
-are replaced by the prefered separator char [default to . (dot)].
+Quickly rename list of files (with or without extensions) and replace any special characters with
+a specific valid string (or separator char).
+
+Currently any string that are not one of letters (a..z, A..Z),
+numbers (0..9), _ (underscore), - (dash), and ' ' spaces string
+are first squeezed into one string and then replaced by any given string/char [default to . (a single dot)].
 
 ### Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'filename_cleaner'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install filename_cleaner
-
-### Usage
-
 ```sh
 gem install filename_cleaner
-filename_cleaner clean
 ```
 
-#### As command line interface (CLI)
+#### Use as command line interface (CLI)
 
 Just type `filename_cleaner` without any options to see the list of help
 
@@ -69,21 +59,21 @@ cd ~/projects/files
 filename_cleaner clean --base-dir . --extes java rb --recursive --sep-char '_' --no-dry-run
 ```
 
-#### As library in your project
+#### Us as library in your project
 
 Add this line to your application's Gemfile:
 
-    gem 'filename_cleaner'
+```
+gem 'filename_cleaner'
+```
 
 And then execute:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install filename_cleaner
-
 ```
+$bundle
+```
+
+Example Usage:
 
 - Use the default separator string '.'
 
@@ -104,6 +94,12 @@ puts clean_name # => 'some_b_d_fil_name.txt'
 ```
 
 ### Changelogs
+
+#### 0.0.2
+
+- Update gem dependencies to the latest version
+- Update gemspec to reflect teh actual feature of the gem
+- Update and cleanup README.md
 
 #### 0.0.1
 
