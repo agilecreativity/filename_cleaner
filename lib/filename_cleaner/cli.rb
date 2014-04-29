@@ -71,7 +71,7 @@ Options:
         files.each do |file|
           dirname  = File.dirname(File.expand_path(file))
           filename = File.basename(file)
-          sanitized_name = FilenameCleaner::Utils.sanitize_filename(filename, options[:sep_char])
+          sanitized_name = FilenameCleaner::sanitize_filename(filename, options[:sep_char])
           old_name = File.expand_path(file)
           new_name = File.expand_path([dirname, sanitized_name].join(File::SEPARATOR))
 

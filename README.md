@@ -95,10 +95,14 @@ puts clean_name # => 'some_b_d_fil_name.txt'
 
 ### Changelogs
 
+#### 0.0.3
+
+- Remove the namespace and code refactoring
+
 #### 0.0.2
 
 - Update gem dependencies to the latest version
-- Update gemspec to reflect teh actual feature of the gem
+- Update gemspec to reflect the actual feature of the gem
 - Update and cleanup README.md
 
 #### 0.0.1
