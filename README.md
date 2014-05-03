@@ -79,7 +79,7 @@ Example Usage:
 
 ```ruby
 require 'filename_cleaner'
-clean_name = FilenameCleaner::Utils.sanitize_filename('some b@d fil$name.txt')
+clean_name = FilenameCleaner::sanitize_filename('some b@d fil$name.txt')
 puts clean_name # => 'some.b.d.fil.name.txt'
 
 ```
@@ -88,7 +88,7 @@ puts clean_name # => 'some.b.d.fil.name.txt'
 
 ```ruby
 require 'filename_cleaner'
-clean_name = FilenameCleaner::Utils.sanitize_filename('some b@d fil$name.txt', '_')
+clean_name = FilenameCleaner::sanitize_filename('some b@d fil$name.txt', '_')
 puts clean_name # => 'some_b_d_fil_name.txt'
 
 ```
