@@ -1,4 +1,4 @@
-## Filename Cleaner
+## filename_cleaner
 
 [![Gem Version](https://badge.fury.io/rb/filename_cleaner.svg)](http://badge.fury.io/rb/filename_cleaner)
 [![Dependency Status](https://gemnasium.com/agilecreativity/filename_cleaner.png)](https://gemnasium.com/agilecreativity/filename_cleaner)
@@ -92,22 +92,6 @@ clean_name = FilenameCleaner::sanitize_filename('some b@d fil$name.txt', '_')
 puts clean_name # => 'some_b_d_fil_name.txt'
 
 ```
-
-### Changelogs
-
-#### 0.0.3
-
-- Remove the namespace and code refactoring
-
-#### 0.0.2
-
-- Update gem dependencies to the latest version
-- Update gemspec to reflect the actual feature of the gem
-- Update and cleanup README.md
-
-#### 0.0.1
-
-- Initial release
 
 ### Contributing
 
