@@ -5,9 +5,8 @@ module FilenameCleaner
     #
     # @param [String] filename the input filename with extension
     # @retyrn [String] the output file with special characters replaced.
-    def sanitize_filename(filename, sep_char = nil)
+    def sanitize_filename(filename, sep_char = '.')
       extension = File.extname(filename)
-
       if extension.empty?
         replace_dot!(sanitize(filename), sep_char)
       else
@@ -33,6 +32,9 @@ module FilenameCleaner
 
       # replace multiple occurrence of dot with one dot
       filename.gsub!(/#{Regexp.quote(DOT)}+/, DOT)
+
+      # remove the last char if it is a dot
+      filename.gsub!(/\.$/, '') if filename[-1] == DOT
 
       filename
     end

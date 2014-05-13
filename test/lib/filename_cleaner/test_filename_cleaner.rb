@@ -8,11 +8,16 @@ describe FilenameCleaner do
     it 'works with text with extension' do
       FilenameCleaner.sanitize('filename.txt').must_equal 'filename.txt'
     end
+    it 'strips the end of string if not letters or numbers' do
+      FilenameCleaner.sanitize('filename .txt').must_equal 'filename.txt'
+      FilenameCleaner.sanitize('filename  .txt').must_equal 'filename.txt'
+      FilenameCleaner.sanitize('filename   !.txt').must_equal 'filename.txt'
+    end
   end
   context '#sanitize_filename' do
     describe 'file with extension' do
       it 'replaces mutilple consecutive chars with one' do
-        FilenameCleaner.sanitize_filename('some!!!$file$:%.txt').must_equal 'some.file..txt'
+        FilenameCleaner.sanitize_filename('some!!!$file$:%.txt').must_equal 'some.file.txt'
       end
       it 'works with default separator' do
         FilenameCleaner.sanitize_filename('some file.txt').must_equal 'some.file.txt'
@@ -23,7 +28,7 @@ describe FilenameCleaner do
     end
     describe 'file without extension' do
       it 'replaces mutilple consecutive chars with one' do
-        FilenameCleaner.sanitize_filename('some!!!$file$:%.').must_equal 'some.file.'
+        FilenameCleaner.sanitize_filename('some!!!$file$:%.').must_equal 'some.file'
       end
       context 'using default separator' do
         it 'works with simple input' do
@@ -39,6 +44,13 @@ describe FilenameCleaner do
         end
         it 'works with complex input' do
           FilenameCleaner.sanitize_filename('File$without!extension', '-').must_equal 'File-without-extension'
+        end
+      end
+      context 'end of the filename' do
+        it 'strips the end of string if not letters or numbers' do
+          FilenameCleaner.sanitize_filename('filename .txt').must_equal 'filename.txt'
+          FilenameCleaner.sanitize_filename('filename  .txt').must_equal 'filename.txt'
+          FilenameCleaner.sanitize_filename('filename   !.txt').must_equal 'filename.txt'
         end
       end
     end

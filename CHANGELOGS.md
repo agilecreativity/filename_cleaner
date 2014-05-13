@@ -1,4 +1,9 @@
 ### Changelogs
+
+#### 0.1.1
+
+- Remove the last char from the filename if it is not numbers or letters
+
 #### 0.1.0
 
 - First [Semantic Versioning][] version.

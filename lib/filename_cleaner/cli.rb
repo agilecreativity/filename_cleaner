@@ -68,7 +68,8 @@ Options:
       if files.empty?
         puts "No match found for your options :#{options}"
       else
-        files.each do |file|
+        files.each_with_index do |file, index|
+          puts "FYI: process : #{index + 1} of #{files.size}"
           dirname  = File.dirname(File.expand_path(file))
           filename = File.basename(file)
           sanitized_name = FilenameCleaner::sanitize_filename(filename, options[:sep_char])
@@ -77,7 +78,8 @@ Options:
 
           if !options[:dry_run]
             if new_name != old_name
-              puts "FYI: rename #{old_name} -> #{new_name}"
+              puts "FYI: old name: #{old_name}"
+              puts "FYI: new name: #{new_name}"
               FileUtils.mv old_name, new_name
             else
               puts "FYI: same file #{old_name}"
