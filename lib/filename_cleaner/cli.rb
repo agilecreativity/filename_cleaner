@@ -72,7 +72,7 @@ Options:
           puts "FYI: process : #{index + 1} of #{files.size}"
           dirname  = File.dirname(File.expand_path(file))
           filename = File.basename(file)
-          sanitized_name = FilenameCleaner::sanitize_filename(filename, options[:sep_char])
+          sanitized_name = FilenameCleaner::sanitize_name_with_extension(filename, options[:sep_char])
           old_name = File.expand_path(file)
           new_name = File.expand_path([dirname, sanitized_name].join(File::SEPARATOR))
 

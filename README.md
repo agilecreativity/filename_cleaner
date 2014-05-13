@@ -79,18 +79,13 @@ Example Usage:
 
 ```ruby
 require 'filename_cleaner'
-clean_name = FilenameCleaner::sanitize_filename('some b@d fil$name.txt')
-puts clean_name # => 'some.b.d.fil.name.txt'
-
-```
-
-- Specify the separator string
-
-```ruby
-require 'filename_cleaner'
-clean_name = FilenameCleaner::sanitize_filename('some b@d fil$name.txt', '_')
+# work with the file that have extension
+clean_name = FilenameCleaner::sanitize_name_with_extension('some b@d fil$name.txt', '_')
 puts clean_name # => 'some_b_d_fil_name.txt'
 
+# or to work with the file without extension
+clean_name = FilenameCleaner::sanitize_name('some b@d fil$name.txt', '_')
+puts clean_name # => 'some_b_d_fil_name_txt'
 ```
 
 ### Contributing
