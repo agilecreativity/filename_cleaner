@@ -2,13 +2,11 @@ require 'thor'
 require 'agile_utils'
 require 'fileutils'
 require_relative '../filename_cleaner'
-
 module FilenameCleaner
   class CLI < Thor
-    desc 'clean', 'Remove special characters in the list of files'
+    desc 'rename', 'Sanitize and rename file with special characters'
     method_option *AgileUtils::Options::BASE_DIR
     method_option *AgileUtils::Options::EXTS
-    method_option *AgileUtils::Options::NON_EXTS
     method_option *AgileUtils::Options::INC_WORDS
     method_option *AgileUtils::Options::EXC_WORDS
     method_option *AgileUtils::Options::IGNORE_CASE
@@ -20,31 +18,30 @@ module FilenameCleaner
                   desc: 'Separator char to use',
                   default: '.'
 
-    method_option :dry_run,
+    method_option :commit,
                   type: :boolean,
-                  aliases: '-d',
-                  desc: 'Perform a dry run only',
-                  default: true
-    def clean
+                  aliases: '-c',
+                  desc: 'Commit your changes',
+                  default: false
+    def rename
       opts = options.symbolize_keys
       if opts[:version]
         puts "You are using Filename Cleaner version #{FilenameCleaner::VERSION}"
         exit
       end
-      run(opts)
+      sanitize_and_rename(opts)
     end
 
     desc 'usage', 'Display help screen'
     def usage
       puts <<-EOS
 Usage:
-  filename_cleaner clean [OPTIONS]
+  filename_cleaner rename
 
 Options:
   -b, [--base-dir=BASE_DIR]                # Base directory
-                                           # Default: . (current directory)
+                                           # Default: . (current directory name)
   -e, [--exts=one two three]               # List of extensions to search for
-  -f, [--non-exts=one two three]           # List of files without extension to search for
   -n, [--inc-words=one two three]          # List of words to be included in the result if any
   -x, [--exc-words=one two three]          # List of words to be excluded from the result if any
   -i, [--ignore-case], [--no-ignore-case]  # Match case insensitively
@@ -54,8 +51,9 @@ Options:
   -v, [--version], [--no-version]          # Display version information
   -s, [--sep-char=SEP_CHAR]                # Separator char to use
                                            # Default: .
-  -d, [--dry-run], [--no-dry-run]          # Perform a dry run only
-                                           # Default: true
+  -c, [--commit], [--no-commit]            # Commit your changes
+
+Sanitize and rename file with special characters
       EOS
     end
 
@@ -63,8 +61,8 @@ Options:
 
     private
 
-    def run(options = {})
-      files = CodeLister.files(options || [])
+    def sanitize_and_rename(options = {})
+      files = CodeLister.files(options)
       if files.empty?
         puts "No match found for your options :#{options}"
       else
@@ -72,22 +70,21 @@ Options:
           puts "FYI: process : #{index + 1} of #{files.size}"
           dirname  = File.dirname(File.expand_path(file))
           filename = File.basename(file)
-          sanitized_name = FilenameCleaner::sanitize_name_with_extension(filename, options[:sep_char])
+          sanitized_name = FilenameCleaner::sanitize(filename, options[:sep_char], true)
           old_name = File.expand_path(file)
           new_name = File.expand_path([dirname, sanitized_name].join(File::SEPARATOR))
-
-          if !options[:dry_run]
-            if new_name != old_name
-              puts "FYI: old name: #{old_name}"
-              puts "FYI: new name: #{new_name}"
+          if new_name != old_name
+            puts "FYI: old name: #{old_name}"
+            puts "FYI: new name: #{new_name}"
+            if options[:commit]
               FileUtils.mv old_name, new_name
-            else
-              puts "FYI: same file #{old_name}"
             end
           else
-            puts 'No changes will be applied as this is a dry-run'
+            puts "FYI: same file #{old_name}"
           end
-
+        end
+        unless options[:commit]
+          puts 'No changes will take place as this is a dry run, to commit your change, please use  --commit option'
         end
       end
     end

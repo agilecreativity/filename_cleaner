@@ -1,11 +1,17 @@
 ## filename_cleaner
 
-[![Gem Version](https://badge.fury.io/rb/filename_cleaner.svg)](http://badge.fury.io/rb/filename_cleaner)
-[![Dependency Status](https://gemnasium.com/agilecreativity/filename_cleaner.png)](https://gemnasium.com/agilecreativity/filename_cleaner)
-[![Code Climate](https://codeclimate.com/github/agilecreativity/filename_cleaner.png)](https://codeclimate.com/github/agilecreativity/filename_cleaner)
+[![Gem Version](https://badge.fury.io/rb/filename_cleaner.svg)][gem]
+[![Dependency Status](https://gemnasium.com/agilecreativity/filename_cleaner.png)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/agilecreativity/filename_cleaner.png)][codeclimate]
+[![Build Status](https://secure.travis-ci.org/agilecreativity/filename_cleaner.png)][travis-ci]
 
-Quickly rename list of files (with or without extensions) and replace any special characters with
-a specific valid string (or separator char).
+[gem]: http://badge.fury.io/rb/filename_cleaner
+[gemnasium]: https://gemnasium.com/agilecreativity/filename_cleaner
+[codeclimate]: https://codeclimate.com/github/agilecreativity/filename_cleaner
+[travis-ci]: http://travis-ci.org/agilecreativity/filename_cleaner
+
+Quickly rename list of files with extension and replace any special characters with
+with any given string.
 
 Currently any string that are not one of letters (a..z, A..Z),
 numbers (0..9), _ (underscore), - (dash), and ' ' spaces string
@@ -23,13 +29,12 @@ Just type `filename_cleaner` without any options to see the list of help
 
 ```
 Usage:
-  filename_cleaner clean
+  filename_cleaner rename
 
 Options:
   -b, [--base-dir=BASE_DIR]                # Base directory
                                            # Default: . (current directory)
   -e, [--exts=one two three]               # List of extensions to search for
-  -f, [--non-exts=one two three]           # List of files without extension to search for
   -n, [--inc-words=one two three]          # List of words to be included in the result if any
   -x, [--exc-words=one two three]          # List of words to be excluded from the result if any
   -i, [--ignore-case], [--no-ignore-case]  # Match case insensitively
@@ -39,24 +44,23 @@ Options:
   -v, [--version], [--no-version]          # Display version information
   -s, [--sep-char=SEP_CHAR]                # Separator char to use
                                            # Default: .
-  -d, [--dry-run], [--no-dry-run]          # Perform a dry run only
-                                           # Default: true
+  -c, [--commit], [--no-commit]            # Commit your changes
 
-Sanitize filename
+Sanitize and rename file with special characters
 ```
 
 To perform the dry-run without make any changes to the file system:
 
 ```
 cd ~/projects/files
-filename_cleaner clean --base-dir . --extes java rb --recursive --sep-char '_'
+filename_cleaner rename --base-dir . --exts java rb --recursive --sep-char _
 ```
 
 To make your change permanent:
 
 ```
 cd ~/projects/files
-filename_cleaner clean --base-dir . --extes java rb --recursive --sep-char '_' --no-dry-run
+filename_cleaner rename --base-dir . --exts java rb --recursive --sep-char _ --commit
 ```
 
 #### Us as library in your project
@@ -80,12 +84,12 @@ Example Usage:
 ```ruby
 require 'filename_cleaner'
 # work with the file that have extension
-clean_name = FilenameCleaner::sanitize_name_with_extension('some b@d fil$name.txt', '_')
-puts clean_name # => 'some_b_d_fil_name.txt'
+new_name = FilenameCleaner.sanitize_name_with_extension('some b@d fil$name.txt', '_')
+puts new_name # => 'some_b_d_fil_name.txt'
 
 # or to work with the file without extension
-clean_name = FilenameCleaner::sanitize_name('some b@d fil$name.txt', '_')
-puts clean_name # => 'some_b_d_fil_name_txt'
+new_name = FilenameCleaner.sanitize_name('some b@d fil$name.txt', '_')
+puts new_name # => 'some_b_d_fil_name_txt'
 ```
 
 ### Contributing
@@ -99,5 +103,4 @@ GitHub pull requests are even better!.
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-[agile_utils]: https://rubygems.org/gems/agile_utils
 [rubocop]: https://github.com/bbatsov/rubocop
