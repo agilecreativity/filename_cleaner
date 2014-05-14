@@ -4,7 +4,7 @@
 [![Dependency Status](https://gemnasium.com/agilecreativity/filename_cleaner.png)][gemnasium]
 [![Code Climate](https://codeclimate.com/github/agilecreativity/filename_cleaner.png)][codeclimate]
 [![Build Status](https://secure.travis-ci.org/agilecreativity/filename_cleaner.png)][travis-ci]
-[![Coverage Status](https://coveralls.io/repos/agilecreativity/filename_cleaner/badge.png)][coveralls]
+[![Coverage Status](https://img.shields.io/coveralls/agilecreativity/filename_cleaner.svg)][coveralls]
 
 [gem]: http://badge.fury.io/rb/filename_cleaner
 [gemnasium]: https://gemnasium.com/agilecreativity/filename_cleaner
