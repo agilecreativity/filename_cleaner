@@ -4,11 +4,13 @@
 [![Dependency Status](https://gemnasium.com/agilecreativity/filename_cleaner.png)][gemnasium]
 [![Code Climate](https://codeclimate.com/github/agilecreativity/filename_cleaner.png)][codeclimate]
 [![Build Status](https://secure.travis-ci.org/agilecreativity/filename_cleaner.png)][travis-ci]
+[![Coverage Status](https://coveralls.io/repos/agilecreativity/filename_cleaner/badge.png)][coveralls]
 
 [gem]: http://badge.fury.io/rb/filename_cleaner
 [gemnasium]: https://gemnasium.com/agilecreativity/filename_cleaner
 [codeclimate]: https://codeclimate.com/github/agilecreativity/filename_cleaner
 [travis-ci]: http://travis-ci.org/agilecreativity/filename_cleaner
+[coveralls]: https://coveralls.io/r/agilecreativity/filename_cleaner
 
 Quickly rename list of files with extension and replace any special characters with
 with any given string.

@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'gem-ctags', '~> 1.0'
   spec.add_development_dependency 'yard', '~> 0.8'
   spec.add_development_dependency 'rubocop', '~> 0.20'
+  spec.add_development_dependency 'coveralls', '~> 0.7'
 end

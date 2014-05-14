@@ -60,7 +60,7 @@ module FilenameCleaner
       name
     end
 
-    # replace 'dot' string with a given string if specified
+    # Replace 'dot' string with a given string if specified
     def replace_dot(string, replace = nil)
       string.gsub!(/#{Regexp.quote(DOT)}+/, replace) if replace
       string
