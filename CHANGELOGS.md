@@ -1,5 +1,9 @@
 ### Changelogs
 
+#### 0.3.1
+
+- Correct the sample usage in README.md
+
 #### 0.3.0
 
 - Cleanup and simplify the apis

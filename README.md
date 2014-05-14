@@ -83,12 +83,12 @@ Example Usage:
 
 ```ruby
 require 'filename_cleaner'
-# work with the file that have extension
-new_name = FilenameCleaner.sanitize_name_with_extension('some b@d fil$name.txt', '_')
+# Treat the input as having extension (e.g. at least one dot within the input)
+new_name = FilenameCleaner.sanitize('some b@d fil$name.txt', '_', true)
 puts new_name # => 'some_b_d_fil_name.txt'
 
-# or to work with the file without extension
-new_name = FilenameCleaner.sanitize_name('some b@d fil$name.txt', '_')
+# Treat the input as having no extension (ignore the meaning of within the input)
+new_name = FilenameCleaner.sanitize('some b@d fil$name.txt', '_', false)
 puts new_name # => 'some_b_d_fil_name_txt'
 ```
 
