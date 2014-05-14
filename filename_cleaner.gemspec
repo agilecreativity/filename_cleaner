@@ -12,7 +12,15 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Bulk rename and remove unwanted characters from list of files in any directory recursively}
   spec.homepage      = 'https://github.com/agilecreativity/filename_cleaner'
   spec.license       = 'MIT'
-  spec.files         = `git ls-files -z`.split("\x0")
+  spec.files         = Dir.glob('{bin,lib}/**/*') + %w(Gemfile
+                                                       Rakefile
+                                                       filename_cleaner.gemspec
+                                                       README.md
+                                                       CHANGELOG.md
+                                                       LICENSE
+                                                       .rubocop.yml
+                                                       .gitignore
+                                                       rubocop-todo.yml)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']

@@ -1,3 +1,7 @@
+### 0.3.3
+* Update gemspec not to use git for include of files
+* Rename 'CHANGELOGS.md' to 'CHANGELOG.md'
+
 ### 0.3.2
 * Add coveralls badges
 
