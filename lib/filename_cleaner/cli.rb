@@ -1,26 +1,33 @@
-require 'thor'
-require 'agile_utils'
-require 'fileutils'
-require_relative '../filename_cleaner'
+require "thor"
+require "agile_utils"
+require "fileutils"
+require_relative "../filename_cleaner"
 module FilenameCleaner
   class CLI < Thor
     # rubocop:disable AmbiguousOperator, LineLength
-    desc 'rename', 'Sanitize and rename file with special characters'
+    desc "rename", "Sanitize and rename file with special characters"
     method_option *AgileUtils::Options::BASE_DIR
     method_option *AgileUtils::Options::EXTS
-    method_option *AgileUtils::Options::INC_WORDS
-    method_option *AgileUtils::Options::EXC_WORDS
-    method_option *AgileUtils::Options::IGNORE_CASE
     method_option *AgileUtils::Options::RECURSIVE
     method_option *AgileUtils::Options::VERSION
     method_option :sep_char,
-                  aliases: '-s',
-                  desc: 'Separator char to use',
-                  default: '.'
+                  aliases: "-s",
+                  desc: "Separator char to use",
+                  default: "_"
+    method_option :downcase,
+                  type: :boolean,
+                  aliases: "-d",
+                  desc: "Convert each word int the filename to lowercase",
+                  default: false
+    method_option :capitalize,
+                  type: :boolean,
+                  aliases: "-t",
+                  desc: "Capitalize each word in the filename",
+                  default: false
     method_option :commit,
                   type: :boolean,
-                  aliases: '-c',
-                  desc: 'Commit your changes',
+                  aliases: "-c",
+                  desc: "Commit your changes",
                   default: false
     def rename
       opts = options.symbolize_keys
@@ -31,7 +38,7 @@ module FilenameCleaner
       sanitize_and_rename(opts)
     end
 
-    desc 'usage', 'Display help screen'
+    desc "usage", "Display help screen"
     def usage
       puts <<-EOS
 Usage:
@@ -39,18 +46,20 @@ Usage:
 
 Options:
   -b, [--base-dir=BASE_DIR]                # Base directory
-                                           # Default: . (current directory name)
+                                           # Default: . (current directory)
   -e, [--exts=one two three]               # List of extensions to search for
-  -n, [--inc-words=one two three]          # List of words to be included in the result if any
-  -x, [--exc-words=one two three]          # List of words to be excluded from the result if any
-  -i, [--ignore-case], [--no-ignore-case]  # Match case insensitively
-                                           # Default: true
   -r, [--recursive], [--no-recursive]      # Search for files recursively
                                            # Default: true
-  -v, [--version], [--no-version]          # Display version information
   -s, [--sep-char=SEP_CHAR]                # Separator char to use
-                                           # Default: .
+                                           # Default: _
+  -d, [--downcase], [--no-downcase]        # Convert each word int the filename to lowercase
+                                           # Default: --no-downcase
+  -t, [--capitalize], [--no-capitalize]    # Capitalize each word in the filename
+                                           # Default: --no-capitalize
   -c, [--commit], [--no-commit]            # Commit your changes
+                                           # Default: --no-commit
+  -v, [--version], [--no-version]          # Display version information
+                                           # Default: --no-version
 
 Sanitize and rename file with special characters
       EOS
@@ -58,8 +67,9 @@ Sanitize and rename file with special characters
     # rubocop:enable AmbiguousOperator, LineLength
     default_task :usage
 
-    private
+  private
 
+    # rubocop:disable LineLength
     def sanitize_and_rename(options = {})
       files = CodeLister.files(options)
       if files.empty?
@@ -67,22 +77,47 @@ Sanitize and rename file with special characters
       else
         files.each_with_index do |file, index|
           puts "FYI: process : #{index + 1} of #{files.size}"
+
           dirname  = File.dirname(File.expand_path(file))
           filename = File.basename(file)
-          sanitized_name = FilenameCleaner.sanitize(filename, options[:sep_char], true)
+          new_name = formatted_name(filename, options)
+
           old_name = File.expand_path(file)
-          new_name = File.expand_path([dirname, sanitized_name].join(File::SEPARATOR))
+
+          new_name = File.expand_path([dirname, new_name].join(File::SEPARATOR))
+
           compare_and_rename(old_name, new_name, options[:commit])
         end
         unless options[:commit]
-          puts '--------------------------------------------------------------'
-          puts 'This is a dry run, to commit your change, please use --commit option'
-          puts '--------------------------------------------------------------'
+          puts "--------------------------------------------------------------"
+          puts "This is a dry run, to commit your change, please use --commit option"
+          puts "--------------------------------------------------------------"
         end
       end
     end
+    # rubocop:enable LineLength
 
-    def compare_and_rename(old_name, new_name, commit = optons[:commit])
+    def formatted_name(filename, options)
+      sep_char = options[:sep_char]
+      sanitized_name = FilenameCleaner.sanitize(filename, sep_char, true)
+
+      # First split the two part so that only name is used!
+      basename = File.basename(sanitized_name, ".*")
+      extname  = File.extname(sanitized_name)
+
+      # TODO: refactoring this code
+      if options[:downcase]
+        new_name = basename.split(sep_char).map(&:downcase).join(sep_char)
+      end
+
+      if options[:capitalize]
+        new_name = basename.split(sep_char).map(&:capitalize).join(sep_char)
+      end
+
+      "#{new_name}#{extname}"
+    end
+
+    def compare_and_rename(old_name, new_name, commit)
       if new_name != old_name
         puts "FYI: old name: #{old_name}"
         puts "FYI: new name: #{new_name}"

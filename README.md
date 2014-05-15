@@ -10,7 +10,7 @@
 [gemnasium]: https://gemnasium.com/agilecreativity/filename_cleaner
 [codeclimate]: https://codeclimate.com/github/agilecreativity/filename_cleaner
 [travis-ci]: http://travis-ci.org/agilecreativity/filename_cleaner
-[coveralls]: https://coveralls.io/r/agilecreativity/filename_cleaner
+[coveralls]: https://coveralls.io/r/agilecreativity/filename_cleaner?branch=master
 
 Quickly rename list of files with extension and replace any special characters with
 with any given string.
@@ -37,16 +37,18 @@ Options:
   -b, [--base-dir=BASE_DIR]                # Base directory
                                            # Default: . (current directory)
   -e, [--exts=one two three]               # List of extensions to search for
-  -n, [--inc-words=one two three]          # List of words to be included in the result if any
-  -x, [--exc-words=one two three]          # List of words to be excluded from the result if any
-  -i, [--ignore-case], [--no-ignore-case]  # Match case insensitively
-                                           # Default: true
   -r, [--recursive], [--no-recursive]      # Search for files recursively
                                            # Default: true
-  -v, [--version], [--no-version]          # Display version information
   -s, [--sep-char=SEP_CHAR]                # Separator char to use
-                                           # Default: .
+                                           # Default: _
+  -d, [--downcase], [--no-downcase]        # Convert each word int the filename to lowercase
+                                           # Default: --no-downcase
+  -t, [--capitalize], [--no-capitalize]    # Capitalize each word in the filename
+                                           # Default: --no-capitalize
   -c, [--commit], [--no-commit]            # Commit your changes
+                                           # Default: --no-commit
+  -v, [--version], [--no-version]          # Display version information
+                                           # Default: --no-version
 
 Sanitize and rename file with special characters
 ```

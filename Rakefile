@@ -1,7 +1,7 @@
 require "bundler/gem_tasks"
 require "rake/testtask"
 
-project_name = 'filename_cleaner'
+project_name = "filename_cleaner"
 
 Rake::TestTask.new do |t|
   t.libs << "lib/#{project_name}"
@@ -9,23 +9,23 @@ Rake::TestTask.new do |t|
   t.verbose = true
 end
 
-task :default => :test
+task default: :test
 
 task :pry do
-  require 'pry'
-  require 'awesome_print'
+  require "pry"
+  require "awesome_print"
   require_relative "lib/#{project_name}"
   include FilenameCleaner
   ARGV.clear
   Pry.start
 end
 
-require 'rubocop/rake_task'
-desc 'Run RuboCop on the lib directory'
+require "rubocop/rake_task"
+desc "Run RuboCop on the lib directory"
 Rubocop::RakeTask.new(:rubocop) do |task|
-  task.patterns = ['lib/**/*.rb']
+  task.patterns = ["lib/**/*.rb"]
   # only show the files with failures
-  task.formatters = ['files']
+  task.formatters = ["files"]
   # don't abort rake on failure
   task.fail_on_error = false
 end

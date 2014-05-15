@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'code_lister'
-require_relative '../lib/filename_cleaner'
+require "code_lister"
+require_relative "../lib/filename_cleaner"
 include FilenameCleaner
 FilenameCleaner::CLI.start(ARGV)

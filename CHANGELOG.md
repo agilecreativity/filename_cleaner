@@ -1,3 +1,17 @@
+### 0.3.5
+
+* Add `--downcase` option to make lower case each word in the filename
+* Add `--capitalize` option to capitalize each word in the filename
+* Make `_` underscore the default value for `--sep-string`
+* Remove less used optons
+  - Remove `--inc-words` option!
+  - Remove `--exc-words` option!
+  - Remove `--ignore-case` option!
+* Consistently use double quote for string
+* Update Coverall configuration
+  - add `.coveralls.yml`
+  - adjust the settings in `test/test_helper.rb`
+
 ### 0.3.4
 
 * Code refactoring
