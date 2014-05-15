@@ -1,7 +1,6 @@
 module FilenameCleaner
   DOT = '.'
   class << self
-
     # Sanitize the any name with or without any extension
     #
     # @param [String] name the input string

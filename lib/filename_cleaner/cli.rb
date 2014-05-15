@@ -4,6 +4,7 @@ require 'fileutils'
 require_relative '../filename_cleaner'
 module FilenameCleaner
   class CLI < Thor
+    # rubocop:disable AmbiguousOperator, LineLength
     desc 'rename', 'Sanitize and rename file with special characters'
     method_option *AgileUtils::Options::BASE_DIR
     method_option *AgileUtils::Options::EXTS
@@ -12,12 +13,10 @@ module FilenameCleaner
     method_option *AgileUtils::Options::IGNORE_CASE
     method_option *AgileUtils::Options::RECURSIVE
     method_option *AgileUtils::Options::VERSION
-
     method_option :sep_char,
                   aliases: '-s',
                   desc: 'Separator char to use',
                   default: '.'
-
     method_option :commit,
                   type: :boolean,
                   aliases: '-c',
@@ -56,7 +55,7 @@ Options:
 Sanitize and rename file with special characters
       EOS
     end
-
+    # rubocop:enable AmbiguousOperator, LineLength
     default_task :usage
 
     private
@@ -70,22 +69,26 @@ Sanitize and rename file with special characters
           puts "FYI: process : #{index + 1} of #{files.size}"
           dirname  = File.dirname(File.expand_path(file))
           filename = File.basename(file)
-          sanitized_name = FilenameCleaner::sanitize(filename, options[:sep_char], true)
+          sanitized_name = FilenameCleaner.sanitize(filename, options[:sep_char], true)
           old_name = File.expand_path(file)
           new_name = File.expand_path([dirname, sanitized_name].join(File::SEPARATOR))
-          if new_name != old_name
-            puts "FYI: old name: #{old_name}"
-            puts "FYI: new name: #{new_name}"
-            if options[:commit]
-              FileUtils.mv old_name, new_name
-            end
-          else
-            puts "FYI: same file #{old_name}"
-          end
+          compare_and_rename(old_name, new_name, options[:commit])
         end
         unless options[:commit]
-          puts 'No changes will take place as this is a dry run, to commit your change, please use  --commit option'
+          puts '--------------------------------------------------------------'
+          puts 'This is a dry run, to commit your change, please use --commit option'
+          puts '--------------------------------------------------------------'
         end
+      end
+    end
+
+    def compare_and_rename(old_name, new_name, commit = optons[:commit])
+      if new_name != old_name
+        puts "FYI: old name: #{old_name}"
+        puts "FYI: new name: #{new_name}"
+        FileUtils.mv old_name, new_name if commit
+      else
+        puts "FYI: same file #{old_name}"
       end
     end
   end
