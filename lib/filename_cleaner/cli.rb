@@ -42,7 +42,7 @@ module FilenameCleaner
     def usage
       puts <<-EOS
 Usage:
-  filename_cleaner rename
+  filename_cleaner
 
 Options:
   -b, [--base-dir=BASE_DIR]                # Base directory
@@ -60,7 +60,6 @@ Options:
                                            # Default: --no-commit
   -v, [--version], [--no-version]          # Display version information
                                            # Default: --no-version
-
 Sanitize and rename file with special characters
       EOS
     end

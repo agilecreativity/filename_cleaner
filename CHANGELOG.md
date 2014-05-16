@@ -1,3 +1,7 @@
+### 0.3.8
+
+* Simplify the CLI usage
+
 ### 0.3.7
 
 * Add the missing `code_lister` to gemspec file

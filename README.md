@@ -31,7 +31,7 @@ Just type `filename_cleaner` without any options to see the list of help
 
 ```
 Usage:
-  filename_cleaner rename
+  filename_cleaner
 
 Options:
   -b, [--base-dir=BASE_DIR]                # Base directory
@@ -57,14 +57,14 @@ To perform the dry-run without make any changes to the file system:
 
 ```
 cd ~/projects/files
-filename_cleaner rename --base-dir . --exts java rb --recursive --sep-char _
+filename_cleaner --base-dir . --exts java rb --recursive --sep-char _
 ```
 
 To make your change permanent:
 
 ```
 cd ~/projects/files
-filename_cleaner rename --base-dir . --exts java rb --recursive --sep-char _ --commit
+filename_cleaner --base-dir . --exts java rb --recursive --sep-char _ --commit
 ```
 
 #### Us as library in your project
