@@ -1,3 +1,8 @@
+### 0.3.7
+
+* Add the missing `code_lister` to gemspec file
+* Add the `.ruby-version` from to `.gitignore`
+
 ### 0.3.6
 
 * Fix the bugs that were introduced in 0.3.5 that caused the file to be renamed
