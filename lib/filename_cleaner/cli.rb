@@ -77,15 +77,11 @@ Sanitize and rename file with special characters
       else
         files.each_with_index do |file, index|
           puts "FYI: process : #{index + 1} of #{files.size}"
-
           dirname  = File.dirname(File.expand_path(file))
           filename = File.basename(file)
           new_name = formatted_name(filename, options)
-
           old_name = File.expand_path(file)
-
           new_name = File.expand_path([dirname, new_name].join(File::SEPARATOR))
-
           compare_and_rename(old_name, new_name, options[:commit])
         end
         unless options[:commit]
@@ -104,24 +100,23 @@ Sanitize and rename file with special characters
       # First split the two part so that only name is used!
       basename = File.basename(sanitized_name, ".*")
       extname  = File.extname(sanitized_name)
-
-      # TODO: refactoring this code
       if options[:downcase]
-        new_name = basename.split(sep_char).map(&:downcase).join(sep_char)
+        basename = basename.split(sep_char).map(&:downcase).join(sep_char)
       end
-
       if options[:capitalize]
-        new_name = basename.split(sep_char).map(&:capitalize).join(sep_char)
+        basename= basename.split(sep_char).map(&:capitalize).join(sep_char)
       end
-
-      "#{new_name}#{extname}"
+      "#{basename}#{extname}"
     end
 
     def compare_and_rename(old_name, new_name, commit)
       if new_name != old_name
         puts "FYI: old name: #{old_name}"
         puts "FYI: new name: #{new_name}"
-        FileUtils.mv old_name, new_name if commit
+        # Don't override the file if it is already exist!
+        unless File.exist?(new_name) || !commit
+          FileUtils.mv old_name, new_name
+        end
       else
         puts "FYI: same file #{old_name}"
       end

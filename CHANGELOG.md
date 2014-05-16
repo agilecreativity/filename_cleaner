@@ -1,5 +1,7 @@
-### 0.3.5
+### 0.3.6
 
+* Fix the bugs that were introduced in 0.3.5 that caused the file to be renamed
+  incorrectly.
 * Add `--downcase` option to make lower case each word in the filename
 * Add `--capitalize` option to capitalize each word in the filename
 * Make `_` underscore the default value for `--sep-string`
@@ -11,6 +13,10 @@
 * Update Coverall configuration
   - add `.coveralls.yml`
   - adjust the settings in `test/test_helper.rb`
+
+### 0.3.5
+
+* Yank - due to one bug that cause the files to be renamed incorrectly!
 
 ### 0.3.4
 
