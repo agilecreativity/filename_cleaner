@@ -19,6 +19,12 @@ Currently any string that are not one of letters (a..z, A..Z),
 numbers (0..9), _ (underscore), - (dash), and ' ' spaces string
 are first squeezed into one string and then replaced by any given string/char [default to . (a single dot)].
 
+Optionally, you could also
+
+- capitalized each words in the output
+- make all words in output lower case
+- use more than one character as the separator string if you prefer
+
 ### Installation
 
 ```sh
