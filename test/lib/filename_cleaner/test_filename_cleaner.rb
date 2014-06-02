@@ -1,5 +1,32 @@
 require_relative "../../test_helper"
 describe FilenameCleaner do
+  context "#formatted_name" do
+    describe "with downcase opton" do
+      let :input_name do
+        "Some Input Filename.txt"
+      end
+      it "uses default sep_char if not specified" do
+        output = FilenameCleaner.formatted_name(input_name)
+        output.must_equal "Some.Input.Filename.txt"
+      end
+      it "uses different sep_char if specified" do
+        output = FilenameCleaner.formatted_name(input_name, sep_char: "_")
+        output.must_equal "Some_Input_Filename.txt"
+      end
+      it "lowercases each word in the filename" do
+        output = FilenameCleaner.formatted_name(input_name, downcase: true)
+        output.must_equal "some.input.filename.txt"
+      end
+      it "capitalizes each word in the filename" do
+        output = FilenameCleaner.formatted_name(input_name, capitalize: true, sep_char: "-")
+        output.must_equal "Some-Input-Filename.txt"
+      end
+      it "ignore unknown options" do
+        output = FilenameCleaner.formatted_name(input_name, unknown_options: "abc")
+        output.must_equal "Some.Input.Filename.txt"
+      end
+    end
+  end
   context "#sanitize" do
     describe "without extension" do
       it "works with simple input" do

@@ -78,7 +78,7 @@ Sanitize and rename file with special characters
           puts "FYI: process : #{index + 1} of #{files.size}"
           dirname  = File.dirname(File.expand_path(file))
           filename = File.basename(file)
-          new_name = formatted_name(filename, options)
+          new_name = FilenameCleaner.formatted_name(filename, options)
           old_name = File.expand_path(file)
           new_name = File.expand_path([dirname, new_name].join(File::SEPARATOR))
           compare_and_rename(old_name, new_name, options[:commit])
@@ -91,22 +91,6 @@ Sanitize and rename file with special characters
       end
     end
     # rubocop:enable LineLength
-
-    def formatted_name(filename, options)
-      sep_char = options[:sep_char]
-      sanitized_name = FilenameCleaner.sanitize(filename, sep_char, true)
-
-      # First split the two part so that only name is used!
-      basename = File.basename(sanitized_name, ".*")
-      extname  = File.extname(sanitized_name)
-      if options[:downcase]
-        basename = basename.split(sep_char).map(&:downcase).join(sep_char)
-      end
-      if options[:capitalize]
-        basename= basename.split(sep_char).map(&:capitalize).join(sep_char)
-      end
-      "#{basename}#{extname}"
-    end
 
     def compare_and_rename(old_name, new_name, commit)
       if new_name != old_name

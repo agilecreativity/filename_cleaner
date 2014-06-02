@@ -1,10 +1,12 @@
 module FilenameCleaner
   DOT = "."
   class << self
-    # Sanitize the any name with or without any extension
+    # Sanitize the any name with or without extension
     #
     # @param [String] name the input string
     # @param [String] sep_char the separator char to be used
+    # @param [Boolean] have_extension indicate if the the input file should be
+    #                  treated as having extension or not having one
     # @return [String] output string with special chars replaced withe specified string
     def sanitize(name, sep_char = ".", have_extension = false)
       if have_extension
@@ -12,6 +14,30 @@ module FilenameCleaner
       else
         sanitize_name_without_extension(name, sep_char)
       end
+    end
+
+    # Get formatted name for existing file
+    #
+    # @param [String] filename the input filename
+    # @param [Hash<Symbol, Object>] opts the hash value for options to be applied
+    #
+    # @option opts [String]  :sep_char The separator string
+    # @option opts [Boolean] :downcase Convert each word to lower case
+    # @option opts [Boolean] :capitalize: Capitalize each word in the name
+    def formatted_name(filename, opts = {})
+      sep_char = opts[:sep_char] || "."
+      sanitized_name = FilenameCleaner.sanitize(filename, sep_char, true)
+
+      # First split the two part so that only name is used!
+      basename = File.basename(sanitized_name, ".*")
+      extname  = File.extname(sanitized_name)
+      if opts[:downcase]
+        basename = basename.split(sep_char).map(&:downcase).join(sep_char)
+      end
+      if opts[:capitalize]
+        basename= basename.split(sep_char).map(&:capitalize).join(sep_char)
+      end
+      "#{basename}#{extname}"
     end
 
   private

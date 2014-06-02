@@ -1,3 +1,8 @@
+### 0.3.9
+
+* Make `formatted_name` public so that it can be re-used in other projects
+* Minor documentation cleanup
+
 ### 0.3.8
 
 * Simplify the CLI usage

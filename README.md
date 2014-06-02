@@ -21,8 +21,8 @@ are first squeezed into one string and then replaced by any given string/char [d
 
 Optionally, you could also
 
-- capitalized each words in the output
-- make all words in output lower case
+- capitalized each word in the output
+- make each word in output lower case
 - use more than one character as the separator string if you prefer
 
 ### Installation
