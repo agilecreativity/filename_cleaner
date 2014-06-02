@@ -3,4 +3,4 @@ source "https://rubygems.org"
 gemspec
 
 # Note: may be just add to to the filename_cleaner.gemspec
-gem 'coveralls', require: false
+gem "coveralls", require: false

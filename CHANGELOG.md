@@ -1,3 +1,9 @@
+### 0.3.10
+
+* Update travis-ci to remove the support for 1.9.3
+* Update the Rakefile to use new API of `rubocop`
+* Update `rubocop` to latest version
+
 ### 0.3.9
 
 * Make `formatted_name` public so that it can be re-used in other projects

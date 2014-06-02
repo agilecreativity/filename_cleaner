@@ -35,7 +35,7 @@ module FilenameCleaner
         basename = basename.split(sep_char).map(&:downcase).join(sep_char)
       end
       if opts[:capitalize]
-        basename= basename.split(sep_char).map(&:capitalize).join(sep_char)
+        basename = basename.split(sep_char).map(&:capitalize).join(sep_char)
       end
       "#{basename}#{extname}"
     end
