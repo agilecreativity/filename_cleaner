@@ -1,3 +1,8 @@
+### 0.3.11
+
+* Remove the `core_ext`, and use method from `agile_utils`
+* Update gemspec to latest gem versions
+
 ### 0.3.10
 
 * Update travis-ci to remove the support for 1.9.3
