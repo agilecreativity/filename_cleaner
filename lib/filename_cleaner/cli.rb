@@ -4,6 +4,8 @@ require "fileutils"
 require_relative "../filename_cleaner"
 module FilenameCleaner
   class CLI < Thor
+    using AgileUtils::HashExt
+
     # rubocop:disable AmbiguousOperator, LineLength
     desc "rename", "Sanitize and rename file with special characters"
     method_option *AgileUtils::Options::BASE_DIR

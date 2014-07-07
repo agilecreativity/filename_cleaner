@@ -1,3 +1,10 @@
+### 0.4.0
+
+* Update to latest gems that do not use monkeypatch
+* Use refinement instead of monkeypatch (using AgileUtils::HashExt)
+* Be more precise about the gem version in the gemspec file
+* Fix the rubocop style
+
 ### 0.3.11
 
 * Remove the `core_ext`, and use method from `agile_utils`
