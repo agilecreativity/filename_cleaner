@@ -1,3 +1,7 @@
+### 0.4.2
+
+- Add the missing line in gemspec file
+
 ### 0.4.1
 
 - Only support ruby 2.1.0+ as we use refinement

@@ -14,6 +14,7 @@ Gem::Specification.new do |spec|
     Turn something like 'my_#$@#$_bad_$!@_filename!!.txt' into 'my_bad_filename.txt'
   ).gsub(/^\s+/, " ")
   spec.homepage      = "https://github.com/agilecreativity/filename_cleaner"
+  spec.required_ruby_version = ">= 2.1.0"
   spec.license       = "MIT"
   spec.files         = Dir.glob("{bin,lib}/**/*") +
                                 %w[Gemfile
