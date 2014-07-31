@@ -1,3 +1,7 @@
+### 0.4.1
+
+- Only support ruby 2.1.0+ as we use refinement
+
 ### 0.4.0
 
 * Update to latest gems that do not use monkeypatch
