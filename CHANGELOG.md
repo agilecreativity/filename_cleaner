@@ -1,3 +1,7 @@
+### 0.4.3
+
+- Lower the requirement for ruby to 1.9.3+
+
 ### 0.4.2
 
 - Add the missing line in gemspec file
