@@ -1,3 +1,7 @@
+### 0.4.4
+
+- Update bundler gem to 1.7.3
+
 ### 0.4.3
 
 - Lower the requirement for ruby to 1.9.3+
