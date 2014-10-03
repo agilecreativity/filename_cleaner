@@ -1,3 +1,8 @@
+### 0.4.5
+
+- Use `require` instead of `require_relative`
+- Misc code cleanup
+
 ### 0.4.4
 
 - Update bundler gem to 1.7.3

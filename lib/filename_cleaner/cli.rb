@@ -1,7 +1,3 @@
-require "thor"
-require "agile_utils"
-require "fileutils"
-require_relative "../filename_cleaner"
 module FilenameCleaner
   class CLI < Thor
     # rubocop:disable AmbiguousOperator, LineLength

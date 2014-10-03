@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
-require "code_lister"
 require_relative "../lib/filename_cleaner"
-include FilenameCleaner
 if ARGV.empty?
   FilenameCleaner::CLI.start(%w[usage])
 else
