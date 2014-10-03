@@ -1,3 +1,7 @@
+### 0.4.6
+
+- Update gem's dependencies
+
 ### 0.4.5
 
 - Use `require` instead of `require_relative`
