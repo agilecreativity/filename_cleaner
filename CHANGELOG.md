@@ -1,3 +1,8 @@
+### 0.4.7
+
+- Update gem to the latest version
+- Use optimistic versions in gemspec
+
 ### 0.4.6
 
 - Update gem's dependencies

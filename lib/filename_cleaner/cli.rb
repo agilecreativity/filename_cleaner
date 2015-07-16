@@ -26,7 +26,7 @@ module FilenameCleaner
                   desc: "Commit your changes",
                   default: false
     def rename
-      opts = options.symbolize_keys
+      opts = options.deep_symbolize_keys
       if opts[:version]
         puts "You are using Filename Cleaner version #{FilenameCleaner::VERSION}"
         exit
