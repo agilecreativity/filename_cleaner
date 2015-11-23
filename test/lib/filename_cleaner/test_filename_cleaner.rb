@@ -89,5 +89,12 @@ describe FilenameCleaner do
         end
       end
     end
+    describe "immutability" do
+      it "does not mutate the input" do
+        input_name = "Global Variables"
+        output_name = FilenameCleaner.sanitize(input_name, "_", false)
+        output_name.wont_equal input_name
+      end
+    end
   end
 end

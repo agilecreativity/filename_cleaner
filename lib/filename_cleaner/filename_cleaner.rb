@@ -87,8 +87,9 @@ module FilenameCleaner
 
     # Replace 'dot' string with a given string if specified
     def replace_dot(string, replace = nil)
-      string.gsub!(/#{Regexp.quote(DOT)}+/, replace) if replace
-      string
+      result = string.clone
+      result.gsub!(/#{Regexp.quote(DOT)}+/, replace) if replace
+      result
     end
   end
 end
