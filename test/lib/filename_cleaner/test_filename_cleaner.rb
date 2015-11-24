@@ -25,12 +25,19 @@ describe FilenameCleaner do
         output = FilenameCleaner.formatted_name(input_name, unknown_options: "abc")
         output.must_equal "Some.Input.Filename.txt"
       end
+      it "does not mutate the input" do
+        input_name.must_equal "Some Input Filename.txt"
+        output = FilenameCleaner.formatted_name(input_name)
+        output.must_equal "Some.Input.Filename.txt"
+        input_name.must_equal "Some Input Filename.txt"
+      end
     end
   end
   context "#sanitize" do
     describe "without extension" do
       it "works with simple input" do
         FilenameCleaner.sanitize("any txt").must_equal "any.txt"
+        FilenameCleaner.sanitize("any txt", "-").must_equal "any-txt"
         FilenameCleaner.sanitize("any txt", "-").must_equal "any-txt"
       end
 
@@ -87,6 +94,14 @@ describe FilenameCleaner do
             FilenameCleaner.sanitize("filename  !#@!.txt", "_", true).must_equal "filename.txt"
           end
         end
+      end
+    end
+    describe "immutability" do
+      it "does not mutate the input" do
+        input_name = "Global Variables"
+        output_name = FilenameCleaner.sanitize(input_name, "_", false)
+        input_name.must_equal 'Global Variables'
+        output_name.must_equal 'Global_Variables'
       end
     end
   end
