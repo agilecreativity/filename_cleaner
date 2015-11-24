@@ -64,9 +64,12 @@ module FilenameCleaner
 
     # Replace the multiple special characters with a dot string
     #
-    # @param [String] name input file
+    # @param [String] input_name input file
     # @return [String] the new name with special characters replaced or removed.
-    def sanitize_with_dot(name)
+    def sanitize_with_dot(input_name)
+      # Don't mutate the input name
+      name = input_name.clone
+
       # Replace any special characters with a dot
       name.gsub!(/[^0-9A-Za-z\-_ ]/, DOT)
 
