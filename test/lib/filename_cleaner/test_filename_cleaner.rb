@@ -38,7 +38,6 @@ describe FilenameCleaner do
       it "works with simple input" do
         FilenameCleaner.sanitize("any txt").must_equal "any.txt"
         FilenameCleaner.sanitize("any txt", "-").must_equal "any-txt"
-        FilenameCleaner.sanitize("any txt", "-").must_equal "any-txt"
       end
 
       it "works with text containing the dot" do

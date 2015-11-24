@@ -1,7 +1,7 @@
 ### 0.4.8
 
 - Prevent the input filename to be mutated
-- Thanks to [@mbogh](Morten Bøgh) for suggestion and PR
+- Thanks to @mbogh for suggestion and PR
 
 ### 0.4.7
 
